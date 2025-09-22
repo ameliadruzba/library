@@ -10,64 +10,64 @@ serial2 = Serial("Sherlock", 2010, "Mystery", 1, 1)
 zbior = [film1, film2, serial1, serial2]
 
 def get_movies():
-    filmy = []
+    movies = []
     for item in zbior:
         if isinstance(item, Film) and not isinstance(item, Serial):
-            filmy.append(item)
-    posortowane = sorted(filmy, key = lambda x: x.tytul)
+            movies.append(item)
+    posortowane = sorted(movies, key = lambda x: x.tytul)
     for x,i in enumerate(posortowane, start=1):
         print(f"{x}. {i}")
 
 def get_serial():
-    seriale = []
+    serial = []
     for item in zbior:
         if isinstance(item, Serial):
-            seriale.append(item)
-    posortowane = sorted(seriale, key = lambda x: x.tytul)
+            serial.append(item)
+    posortowane = sorted(serial, key = lambda x: x.tytul)
     for x,y in enumerate(posortowane, start=1):
         print(f"{x}. {y}")
 
 def search():
     found = False
-    pytanie = input('Podaj nazwe serialu lub filmu: ')
+    que = input('Podaj nazwe serialu lub filmu: ')
     for i in zbior:
-        if i.tytul.lower() == pytanie.lower():
+        if i.tytul.lower() == que.lower():
             found = True
             print(f'Znaleziono: {i}')
     if not found:
         print('Nie posiadamy takiego filmu w kolekcji')
 
 def generate_views():
-    losowa_liczba = random.randint(1, 100)
-    element_zbioru = random.choice(zbior)
-    element_zbioru.play(losowa_liczba)
-    print (f'Do elementu {element_zbioru} dodano: {losowa_liczba} odtworzen')
+    random_number = random.randint(1, 100)
+    set_element = random.choice(zbior)
+    set_element.play(random_number)
+    print (f'Do elementu {set_element} dodano: {random_number} odtworzen')
 
 def farming_views():
     for i in range(10):
         generate_views()
 
 def top_tittle(zbior):
-    ile_rzeczy = int(input('podaj ilosc: '))
+    how_many_items = int(input('podaj ilosc: '))
     posortowane = sorted(zbior, key = lambda x: x.liczba_odtworzen, reverse=True)
-    mini_zbior = posortowane[:ile_rzeczy]
-    for l, i in enumerate(mini_zbior, start=1):
+    mini_set = posortowane[:how_many_items]
+    for l, i in enumerate(mini_set, start=1):
         print(f"{l}. {i.tytul}")
 
 def add_serial():
-    tytul = input('Podaj tytul: ')
-    rok_produkcji = int(input('Podaj rok produkcji: '))
-    gatunek = input('Podaj gatunek: ')
-    numer_odcinka = int(input('Podaj numer odcinka: '))
-    numer_sezonu = int(input('Podaj numer sezonu: '))
-    zbior.append(Serial(tytul, rok_produkcji, gatunek, numer_odcinka, numer_sezonu))
+    title = input('Podaj title: ')
+    year_production = int(input('Podaj rok produkcji: '))
+    typ = input('Podaj gatunek: ')
+    episode = int(input('Podaj numer odcinka: '))
+    sesons = int(input('Podaj numer sezonu: '))
+    zbior.append(Serial(title, year_production, typ, episode, sesons))
     for i in zbior:
         return i
 
 def odcinki():
-    pytanie = input('Podaj tytul serialu, w ktorym chcesz sprawdzic ilosc odcinkow: ')
-    liczbik = 0
+    que = input('Podaj tytul serialu, w ktorym chcesz sprawdzic ilosc odcinkow: ')
+    count = 0
     for i in zbior:
-        if isinstance(i, Serial) and i.tytul.lower() == pytanie.lower():
-            liczbik += 1
-    print(f"liczba podanych odc to {liczbik}")
+        if isinstance(i, Serial) and i.tytul.lower() == que.lower():
+            count += 1
+    print(f"liczba podanych odc to {count}")
